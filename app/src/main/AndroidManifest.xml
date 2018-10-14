@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="wazzup.shuffler">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/StandardTheme">
+        <activity
+            android:name="activities.MenuActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="activities.RandomActivity"
+            android:launchMode="singleTask"
+            android:label="@string/title_activity_random"
+            android:parentActivityName="activities.MenuActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name="activities.GruppenActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName="activities.MenuActivity"
+            android:label="@string/title_activity_gruppen"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name="wazzup.shuffler.TestShow"
+            android:parentActivityName="activities.GruppenActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="activities.RandomNumberActivity"
+            android:parentActivityName="activities.MenuActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name="activities.Save_Activity"
+            android:parentActivityName="activities.RandomActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
+        <activity
+            android:name="activities.Save_Activity2"
+            android:parentActivityName="activities.GruppenActivity"
+            ></activity>
+    </application>
+
+</manifest>
