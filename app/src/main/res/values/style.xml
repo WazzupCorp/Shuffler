@@ -7,4 +7,9 @@
     <style name="ActionbarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
     </style>
 
+
+    <style name="DialogScale">
+        <item name="android:windowEnterAnimation">@anim/scale_in</item>
+        <item name="android:windowExitAnimation">@anim/scale_out</item>
+    </style>
 </resources>

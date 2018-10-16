@@ -60,6 +60,7 @@ public class RandomNumberActivity extends AppCompatActivity {
                         TextView mPerson = myDialog.findViewById(R.id.popupPerson2);
                         Objects.requireNonNull(myDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                         mPerson.setText(String.valueOf(generateRandomNumber()));
+                        myDialog.getWindow().setWindowAnimations(R.style.DialogScale);
                         myDialog.show();
                     }
                     else

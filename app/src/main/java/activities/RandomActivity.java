@@ -137,6 +137,7 @@ public class RandomActivity extends AppCompatActivity{
                     TextView mPerson = myDialog.findViewById(R.id.popupPerson);
                     mPerson.setText(shuffle(personenliste, personenliste.size()));
                     Objects.requireNonNull(myDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    myDialog.getWindow().setWindowAnimations(R.style.DialogScale);
                     myDialog.show();
 
                 }
