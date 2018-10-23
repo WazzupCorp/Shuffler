@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/functions" android:title="Functions"/>
-    <item android:id="@+id/darkmode" android:title="Darkmode" />
-    <item android:id="@+id/settings" android:title="Settings" />
-    <item android:id="@+id/about" android:title="About" />
+    <item android:id="@+id/functions" android:title="Functions" android:icon="@drawable/functions" android:iconTint="@color/black" />
+    <item android:id="@+id/darkmode" android:title="Darkmode" android:icon="@drawable/darkmode" android:iconTint="@color/black" />
+    <item android:id="@+id/settings" android:title="Settings" android:icon="@drawable/settings" android:iconTint="@color/black" />
+    <item android:id="@+id/about" android:title="About" android:icon="@drawable/about" android:iconTint="@color/black"/>
 </menu>
