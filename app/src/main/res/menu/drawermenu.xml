@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:id="@+id/random" android:title="RandomShuf"/>
-    <item android:id="@+id/gruppe" android:title="GruppenShuffle" />
-    <item android:id="@+id/random_number" android:title="RandomNumber" />
+    <item android:id="@+id/functions" android:title="Functions"/>
+    <item android:id="@+id/darkmode" android:title="Darkmode" />
+    <item android:id="@+id/settings" android:title="Settings" />
+    <item android:id="@+id/about" android:title="About" />
 </menu>

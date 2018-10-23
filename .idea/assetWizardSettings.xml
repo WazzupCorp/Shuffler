@@ -19,8 +19,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\App\Test.jpg" />
-                                      <entry key="outputName" value="Test" />
+                                      <entry key="imageAsset" value="C:\shuffler_icon.png" />
+                                      <entry key="outputName" value="shuffler_icon" />
                                     </map>
                                   </option>
                                 </PersistentState>

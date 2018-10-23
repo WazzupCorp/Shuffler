@@ -31,6 +31,7 @@ public class MenuActivity extends AppCompatActivity {
     private CardView GroupShuffle;
     private CardView RandomNumber;
     private GridLayout gridLayout;
+    private NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -68,11 +69,13 @@ public class MenuActivity extends AppCompatActivity {
 
     private void initiate()
     {
+
+
         gridLayout = findViewById(R.id.GridMenu);
         RandomShuffle = findViewById(R.id.RandomCard);
         GroupShuffle = findViewById(R.id.GroupCard);
         RandomNumber = findViewById(R.id.RandomNumberCard);
-
+        navigationView = findViewById(R.id.menu_navigationview);
     }
 
     @Override
@@ -86,7 +89,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
 
-
+/*
     public void selectItemDrawer(MenuItem item)
     {
         Fragment myFragment = null;
@@ -117,8 +120,8 @@ public class MenuActivity extends AppCompatActivity {
         setTitle(item.getTitle());
         mDrawerlayout.closeDrawers();
     }
-
-
+*/
+/*
     private void setupdDrawerContent(NavigationView navigationView)
     {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -129,7 +132,7 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
     }
-
+*/
 
 }
 
