@@ -12,8 +12,6 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@android:color/holo_green_light"
         android:elevation="4dp"
-        android:textColor="@color/white"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

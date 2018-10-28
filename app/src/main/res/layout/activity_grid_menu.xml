@@ -65,7 +65,6 @@
             android:backgroundTint="@android:color/holo_red_light"
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp"
-            app:cardBackgroundColor="@color/white"
             android:foreground="?android:attr/selectableItemBackgroundBorderless">
 
 
@@ -101,7 +100,6 @@
             android:backgroundTint="@android:color/holo_green_light"
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp"
-            app:cardBackgroundColor="@color/white"
             android:foreground="?android:attr/selectableItemBackgroundBorderless">
 
 
@@ -137,7 +135,6 @@
             android:backgroundTint="@android:color/holo_blue_light"
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp"
-            app:cardBackgroundColor="@color/white"
             android:foreground="?android:attr/selectableItemBackgroundBorderless">
 
 
@@ -172,7 +169,6 @@
             android:backgroundTint="@android:color/holo_orange_light"
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp"
-            app:cardBackgroundColor="@color/white"
             android:foreground="?android:attr/selectableItemBackgroundBorderless">
 
 
@@ -208,7 +204,7 @@
         app:headerLayout="@layout/navigationview_header"
         android:id="@+id/menu_navigationview"
         android:background="@drawable/navigationview_rounded"
-        android:layout_width="150dp"
+        android:layout_width="160dp"
         android:layout_height="330dp"
         android:layout_gravity="center|start"
         app:menu="@menu/drawermenu" />

@@ -23,25 +23,56 @@ public class Save_Activity2 extends AppCompatActivity {
     private ArrayList<String> preferenceArray;
     private RecyclerView SaveActivityList;
     private Button SaveButton;
-    private Button DeleteButton;
+    private Button SortButton;
     private EditText pref;
     private Save_Adapter SaveActivityListAdapter;
     private RecyclerView.LayoutManager SaveActivityListManager;
     public static final String PREFERENCE_KEY = "name";
     private Toolbar sToolbar;
+    private boolean THEME_MODE;
+    private String THEME = "themes";
+    private String THEME_KEY = "THEME";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+        loadThemeMode();
+        if(THEME_MODE)
+            setTheme(R.style.darkmode);
+        else
+            setTheme(R.style.standardTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save_2);
         loadData();
         buildRecyclerView();
         setButtons();
 
+        if(THEME_MODE)
+        {
+          pref.setBackground(getResources().getDrawable(R.drawable.rounded_edittext_dark));
+
+            SaveButton.setBackground(getResources().getDrawable(R.drawable.round_button_dark));
+            SortButton.setBackground(getResources().getDrawable(R.drawable.round_button_dark));
+        }
+        else
+        {
+          pref.setBackground(getResources().getDrawable(R.drawable.rounded_edittext));
+            SaveButton.setBackground(getResources().getDrawable(R.drawable.round_button));
+            SortButton.setBackground(getResources().getDrawable(R.drawable.round_button));
+        }
+
 
     }
 
 
-
+    public void loadThemeMode()
+    {
+        SharedPreferences sharedPref = getSharedPreferences(THEME,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        THEME_MODE = sharedPref.getBoolean(THEME_KEY,true);
+    }
 
     public void insertItem(String s)
     {
@@ -67,7 +98,7 @@ public class Save_Activity2 extends AppCompatActivity {
         sToolbar = findViewById(R.id.saveToolbar2);
         SaveActivityList = findViewById(R.id.actionlist);
         SaveButton = findViewById(R.id.RandomSave);
-        DeleteButton = findViewById(R.id.RandomDelete);
+        SortButton = findViewById(R.id.RandomDelete);
         pref = findViewById(R.id.preferences);
         SaveActivityList.setHasFixedSize(true);
         SaveActivityListManager = new LinearLayoutManager(Save_Activity2.this);
@@ -108,7 +139,7 @@ public class Save_Activity2 extends AppCompatActivity {
 
         });
 
-        DeleteButton.setOnClickListener(new View.OnClickListener() {
+        SortButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sortList();

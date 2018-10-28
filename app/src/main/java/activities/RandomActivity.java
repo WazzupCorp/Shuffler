@@ -53,10 +53,22 @@ public class RandomActivity extends AppCompatActivity{
     private Toolbar rToolbar;
     private Dialog myDialog;
     private final String PERSON_KEY = "persons";
+    private boolean THEME_MODE;
+    private String THEME = "themes";
+    private String THEME_KEY = "THEME";
+    private Context context;
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
+
+        loadThemeMode();
+        if(THEME_MODE)
+            setTheme(R.style.darkmode);
+        else
+            setTheme(R.style.standardTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_random);
 
@@ -75,7 +87,23 @@ public class RandomActivity extends AppCompatActivity{
         initiate();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
+        if(THEME_MODE)
+        {
 
+            PEingabe.setDropDownBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_edittext_dark));
+            PEingabe.setBackground(getResources().getDrawable(R.drawable.rounded_edittext_dark));
+
+            Pspeichern.setBackground(getResources().getDrawable(R.drawable.round_button_dark));
+            Shuffle.setBackground(getResources().getDrawable(R.drawable.round_button_dark));
+        }
+        else
+        {
+            PEingabe.setDropDownBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_edittext));
+            PEingabe.setBackground(getResources().getDrawable(R.drawable.rounded_edittext));
+
+            Pspeichern.setBackground(getResources().getDrawable(R.drawable.round_button));
+            Shuffle.setBackground(getResources().getDrawable(R.drawable.round_button));
+        }
 
 
         PEingabe.setOnTouchListener(new View.OnTouchListener() {
@@ -227,9 +255,11 @@ public class RandomActivity extends AppCompatActivity{
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
-    public void ShowPopup(View v)
+    public void loadThemeMode()
     {
-
+        SharedPreferences sharedPref = getSharedPreferences(THEME,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        THEME_MODE = sharedPref.getBoolean(THEME_KEY,true);
     }
 
 

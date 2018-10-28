@@ -28,7 +28,7 @@ public class Save_Activity extends AppCompatActivity {
     private ArrayList<String> preferenceArray;
     private RecyclerView SaveActivityList;
     private Button SaveButton;
-    private Button DeleteButton;
+    private Button SortButton;
     private EditText pref;
     private Save_Adapter SaveActivityListAdapter;
     private RecyclerView.LayoutManager SaveActivityListManager;
@@ -38,8 +38,22 @@ public class Save_Activity extends AppCompatActivity {
     private ImageView deleteImage;
     private AdapterView.OnItemClickListener itemClickListener;
     private Toolbar sToolbar;
+    private boolean THEME_MODE;
+    private String THEME = "themes";
+    private String THEME_KEY = "THEME";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        loadThemeMode();
+        if(THEME_MODE)
+            setTheme(R.style.darkmode);
+        else
+            setTheme(R.style.standardTheme);
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save_activity);
         loadData();
@@ -49,12 +63,30 @@ public class Save_Activity extends AppCompatActivity {
 
 
 
+        if(THEME_MODE)
+        {
+            pref.setBackground(getResources().getDrawable(R.drawable.rounded_edittext_dark));
 
+            SaveButton.setBackground(getResources().getDrawable(R.drawable.round_button_dark));
+            SortButton.setBackground(getResources().getDrawable(R.drawable.round_button_dark));
+        }
+        else
+        {
+           pref.setBackground(getResources().getDrawable(R.drawable.rounded_edittext));
+
+            SaveButton.setBackground(getResources().getDrawable(R.drawable.round_button));
+            SortButton.setBackground(getResources().getDrawable(R.drawable.round_button));
+        }
 
 
     }
 
-
+    public void loadThemeMode()
+    {
+        SharedPreferences sharedPref = getSharedPreferences(THEME,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        THEME_MODE = sharedPref.getBoolean(THEME_KEY,true);
+    }
 
     public void insertItem(String s)
     {
@@ -87,7 +119,7 @@ public class Save_Activity extends AppCompatActivity {
         SaveActivityList.setAdapter(SaveActivityListAdapter);
         deleteImage = findViewById(R.id.image_delete);
         SaveButton = findViewById(R.id.RandomSave);
-        DeleteButton = findViewById(R.id.RandomDelete);
+        SortButton = findViewById(R.id.RandomDelete);
         pref = findViewById(R.id.preferences);
 
         setSupportActionBar(sToolbar);
@@ -159,7 +191,7 @@ removeItem(position);
 
         });
 
-        DeleteButton.setOnClickListener(new View.OnClickListener() {
+        SortButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -181,6 +213,7 @@ removeItem(position);
 
     public void sortList()
     {
+
         Collections.sort(preferenceArray, new Comparator<String>() {
             @Override
             public int compare(String s, String t1) {

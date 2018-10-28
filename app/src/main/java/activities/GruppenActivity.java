@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -51,11 +52,20 @@ public class GruppenActivity extends AppCompatActivity {
     private String PERSON_KEY2 = "persons2";
     private ArrayAdapter<Integer> Sadapter;
     private ArrayList<Gruppe> GruppenListe;
-
+    private boolean THEME_MODE;
+    private String THEME = "themes";
+    private String THEME_KEY = "THEME";
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+
+            loadThemeMode();
+        if(THEME_MODE)
+            setTheme(R.style.darkmode);
+        else
+            setTheme(R.style.standardTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gruppen);
 
@@ -64,7 +74,26 @@ public class GruppenActivity extends AppCompatActivity {
         loadData();
         initiate();
 
+        if(THEME_MODE)
+        {
+            PEingabe2.setDropDownBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_edittext_dark));
+            PEingabe2.setBackground(getResources().getDrawable(R.drawable.rounded_edittext_dark));
+            //PEingabe2.setTextColor(getResources().getColor(R.color.black));
+            gruppenSpinner.setPopupBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_edittext_dark));
 
+            Pspeichern2.setBackground(getResources().getDrawable(R.drawable.round_button_dark));
+            Shuffle2.setBackground(getResources().getDrawable(R.drawable.round_button_dark));
+        }
+        else
+        {
+            PEingabe2.setDropDownBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_edittext));
+            PEingabe2.setBackground(getResources().getDrawable(R.drawable.rounded_edittext));
+            gruppenSpinner.setPopupBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_edittext));
+
+            Pspeichern2.setBackground(getResources().getDrawable(R.drawable.round_button));
+            Shuffle2.setBackground(getResources().getDrawable(R.drawable.round_button));
+
+        }
 
 
         PEingabe2.setOnTouchListener(new View.OnTouchListener() {
@@ -137,6 +166,11 @@ public class GruppenActivity extends AppCompatActivity {
         SpinnerArray.add(3);
         SpinnerArray.add(4);
         SpinnerArray.add(5);
+        SpinnerArray.add(6);
+        SpinnerArray.add(7);
+        SpinnerArray.add(8);
+        SpinnerArray.add(9);
+        SpinnerArray.add(10);
 
         //Layout bezogene Widgets
         Addbutton = findViewById(R.id.imageButton2);
@@ -186,6 +220,14 @@ public class GruppenActivity extends AppCompatActivity {
 
 
 
+    }
+
+
+    public void loadThemeMode()
+    {
+        SharedPreferences sharedPref = getSharedPreferences(THEME,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        THEME_MODE = sharedPref.getBoolean(THEME_KEY,true);
     }
 
     private void loadData() //Gibt die gespeicherten preferences zurück

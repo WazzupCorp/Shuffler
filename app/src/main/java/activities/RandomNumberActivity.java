@@ -1,6 +1,7 @@
 package activities;
 
 import android.app.Dialog;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
@@ -24,13 +25,39 @@ public class RandomNumberActivity extends AppCompatActivity {
     private Button doIt;
     private Toolbar nToolbar;
     private Dialog myDialog;
+    private boolean THEME_MODE;
+    private String THEME = "themes";
+    private String THEME_KEY = "THEME";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        loadThemeMode();
+        if(THEME_MODE)
+            setTheme(R.style.darkmode);
+
+        else
+            setTheme(R.style.standardTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.random_number);
         initiate();
 
+        if(THEME_MODE)
+        {
+            first.setBackground(getResources().getDrawable(R.drawable.rounded_edittext_dark));
+            second.setBackground(getResources().getDrawable(R.drawable.rounded_edittext_dark));
+
+            doIt.setBackground(getResources().getDrawable(R.drawable.round_button_dark));
+
+        }
+        else
+        {
+            first.setBackground(getResources().getDrawable(R.drawable.rounded_edittext));
+            second.setBackground(getResources().getDrawable(R.drawable.rounded_edittext));
+
+            doIt.setBackground(getResources().getDrawable(R.drawable.round_button));
+        }
 
     }
 
@@ -103,7 +130,12 @@ public class RandomNumberActivity extends AppCompatActivity {
             return 0;
     }
 
-
+    public void loadThemeMode()
+    {
+        SharedPreferences sharedPref = getSharedPreferences(THEME,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        THEME_MODE = sharedPref.getBoolean(THEME_KEY,true);
+    }
 
     }
 
