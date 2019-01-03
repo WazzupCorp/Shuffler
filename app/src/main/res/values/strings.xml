@@ -10,7 +10,7 @@
     <string name="RandomShuffle">RandomShuffle</string>
     <string name="GruppenShuffle">GroupShuffle</string>
     <string name="RandomNumber">RandomNumber</string>
-    <string name="Platzhalter">Platzhalter</string>
+    <string name="generator">Password Generator</string>
     <string name="title_activity_settings">Settings</string>
     <string name="Preferences_name">preferences</string>
     <string name="Names_name">names</string>

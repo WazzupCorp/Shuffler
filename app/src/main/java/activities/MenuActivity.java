@@ -27,6 +27,7 @@ import android.widget.GridLayout;
 import Fragments.GruppenFragment;
 import Fragments.RandomFragment;
 import Fragments.RandomNumberFragment;
+import wazzup.shuffler.FiftyFiftyActivity;
 import wazzup.shuffler.R;
 
 
@@ -37,11 +38,16 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     private CardView RandomShuffle;
     private CardView GroupShuffle;
     private CardView RandomNumber;
+    private CardView FiftyFifty;
     private GridLayout gridLayout;
-    private NavigationView navigationView;
+    public NavigationView navigationView;
     private boolean THEME_MODE =false;
     private String THEME = "themes";
     private String THEME_KEY = "THEME";
+    private String SIDEBAR_SETTINGS = "sidebar";
+    private String SIDEBAR_KEY = "sidebarkey";
+    private boolean SETTINGS_MODE;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -58,6 +64,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
          setTheme(R.style.standardTheme);
         }
 
+        loadSettings();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid_menu);
@@ -77,7 +84,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         final Intent x = new Intent(this, RandomActivity.class);
         final Intent y = new Intent(this, GruppenActivity.class);
         final Intent z = new Intent(this, RandomNumberActivity.class);
-
+        final Intent a = new Intent(this, FiftyFiftyActivity.class);
         RandomShuffle.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
@@ -96,7 +103,12 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         startActivity(z);
     }
 });
-
+        FiftyFifty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(a);
+            }
+        });
     }
 
 
@@ -109,72 +121,23 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         RandomShuffle = findViewById(R.id.RandomCard);
         GroupShuffle = findViewById(R.id.GroupCard);
         RandomNumber = findViewById(R.id.RandomNumberCard);
+        FiftyFifty = findViewById(R.id.FiftyFifty);
         navigationView = findViewById(R.id.menu_navigationview);
         mDrawerlayout = findViewById(R.id.drawer_layout);
         navigationView.setNavigationItemSelectedListener(this);
-    }
 
-
-
-
-/*
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (mToggle.onOptionsItemSelected(item)) {
-
-
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
-
-    public void selectItemDrawer(MenuItem item)
-    {
-
-        switch (item.getItemId())
+        //NavigationView Seite
+        if(SETTINGS_MODE)
         {
-            case R.id.functions:
-
-            break;
-            case R.id.darkmode:
-                if (this.getTheme().equals(R.style.standardTheme)
-                        ) {
-                    setTheme(R.style.darkmode);
-
-                }
-                else{
-                    setTheme(R.style.standardTheme);
-                }
-            case R.id.settings:
-
-                break;
-            case R.id.about:
-
-                break;
-            default:
-
+         mDrawerlayout.isDrawerOpen(GravityCompat.END);
         }
-
+        else
+        {
+            mDrawerlayout.isDrawerOpen(GravityCompat.START);
+        }
     }
 
 
-    private void setupdDrawerContent(NavigationView navigationView)
-    {
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-
-
-               selectItemDrawer(item);
-                return true;
-            }
-        });
-    }
-
-*/
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -199,10 +162,11 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                     recreate();
 
                 }
-
+                break;
 
             case R.id.settings:
-
+                    Intent i = new Intent(this, settings.class);
+                    startActivity(i);
                 break;
             case R.id.about:
 
@@ -217,7 +181,6 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     public void loadThemeMode()
     {
         SharedPreferences sharedPref = getSharedPreferences(THEME,MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
       THEME_MODE = sharedPref.getBoolean(THEME_KEY,true);
     }
 
@@ -226,6 +189,12 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         SharedPreferences sharedPref = getSharedPreferences(THEME , MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean(THEME_KEY, THEME_MODE).apply();
+    }
+
+    public void loadSettings()
+    {
+        SharedPreferences sharedPref = getSharedPreferences(SIDEBAR_SETTINGS,MODE_PRIVATE);
+        SETTINGS_MODE = sharedPref.getBoolean(SIDEBAR_KEY,true);
     }
 
 }

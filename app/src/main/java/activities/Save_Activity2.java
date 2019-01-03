@@ -1,5 +1,6 @@
 package activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,23 +18,21 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Objects;
 
 import wazzup.shuffler.R;
 
 public class Save_Activity2 extends AppCompatActivity {
     private ArrayList<String> preferenceArray;
-    private RecyclerView SaveActivityList;
     private Button SaveButton;
     private Button SortButton;
     private EditText pref;
     private Save_Adapter SaveActivityListAdapter;
-    private RecyclerView.LayoutManager SaveActivityListManager;
     public static final String PREFERENCE_KEY = "name";
-    private Toolbar sToolbar;
     private boolean THEME_MODE;
-    private String THEME = "themes";
-    private String THEME_KEY = "THEME";
+    protected String THEME_KEY = "THEME";
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -64,13 +64,30 @@ public class Save_Activity2 extends AppCompatActivity {
         }
 
 
+        pref.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_RIGHT = 2;
+
+
+                if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                    if(event.getRawX() >= (pref.getRight() - pref.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        // your action here
+                        pref.getText().clear();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
     }
 
 
     public void loadThemeMode()
     {
+        String THEME = "themes";
         SharedPreferences sharedPref = getSharedPreferences(THEME,MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
         THEME_MODE = sharedPref.getBoolean(THEME_KEY,true);
     }
 
@@ -82,12 +99,15 @@ public class Save_Activity2 extends AppCompatActivity {
     public void removeItem(int position)
     {
         SharedPreferences sharedPref = getSharedPreferences(getString(R.string.Names_name),MODE_PRIVATE);
-        SharedPreferences.Editor editor =sharedPref.edit();
         Gson gson = new Gson();
         String json = sharedPref.getString(PREFERENCE_KEY,null);
         Type type = new TypeToken<ArrayList<String>>(){}.getType();
         preferenceArray = gson.fromJson(json,type);
+
+
+        assert preferenceArray != null;
         preferenceArray.remove(position);
+
         SaveData();
         buildRecyclerView();
 
@@ -95,18 +115,18 @@ public class Save_Activity2 extends AppCompatActivity {
 
     private void buildRecyclerView()
     {
-        sToolbar = findViewById(R.id.saveToolbar2);
-        SaveActivityList = findViewById(R.id.actionlist);
+        Toolbar sToolbar = findViewById(R.id.saveToolbar2);
+        RecyclerView saveActivityList = findViewById(R.id.actionlist);
         SaveButton = findViewById(R.id.RandomSave);
         SortButton = findViewById(R.id.RandomDelete);
         pref = findViewById(R.id.preferences);
-        SaveActivityList.setHasFixedSize(true);
-        SaveActivityListManager = new LinearLayoutManager(Save_Activity2.this);
+        saveActivityList.setHasFixedSize(true);
+        RecyclerView.LayoutManager saveActivityListManager = new LinearLayoutManager(Save_Activity2.this);
         SaveActivityListAdapter = new Save_Adapter(Save_Activity2.this, preferenceArray);
-        SaveActivityList.setLayoutManager(SaveActivityListManager);
-        SaveActivityList.setAdapter(SaveActivityListAdapter);
+        saveActivityList.setLayoutManager(saveActivityListManager);
+        saveActivityList.setAdapter(SaveActivityListAdapter);
         setSupportActionBar(sToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
@@ -153,7 +173,7 @@ public class Save_Activity2 extends AppCompatActivity {
         Gson gson = new Gson();
         String json = gson.toJson(preferenceArray);
         editor.putString(PREFERENCE_KEY, json);
-        editor.commit();
+        editor.apply();
     }
 
 
@@ -176,7 +196,7 @@ public class Save_Activity2 extends AppCompatActivity {
         SharedPreferences.Editor editor =sharedPref.edit();
         Gson gson = new Gson();
         editor.clear();
-        editor.commit();
+        editor.apply();
     }
 
     public void sortList()
