@@ -6,205 +6,204 @@
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
        >
 
 
-
-
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:weightSum="6"
             tools:context="wazzup.shuffler.AppCompatPreferenceActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-        <TextView
-            android:id="@+id/textGrid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/app_name"
-            android:textColor="@android:color/holo_blue_dark"
-            android:textSize="34sp" />
-    </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2">
 
-    <GridLayout
-        android:id="@+id/GridMenu"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4"
-        android:alignmentMode="alignMargins"
-        android:columnCount="1"
-        android:columnOrderPreserved="false"
-        android:padding="14dp"
-        android:rowCount="1"
-        android:animateLayoutChanges="true">
-
-
-        <!-- Row 1-->
-        <android.support.v7.widget.CardView
-            android:id="@+id/RandomCard"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_rowWeight="1"
-            android:backgroundTint="@android:color/holo_red_light"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="2dp"
-            android:foreground="?android:attr/selectableItemBackgroundBorderless">
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="16dp"
-                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
                 <TextView
+                    android:id="@+id/textGrid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="RandomShuffle"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                    android:layout_centerInParent="true"
+                    android:text="@string/app_name"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:textSize="34sp" />
+            </RelativeLayout>
+
+            <GridLayout
+                android:id="@+id/GridMenu"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4"
+                android:alignmentMode="alignMargins"
+                android:animateLayoutChanges="true"
+                android:columnCount="1"
+                android:columnOrderPreserved="false"
+                android:padding="14dp"
+                android:rowCount="1">
 
 
-            </LinearLayout>
+                <!-- Row 1-->
+                <android.support.v7.widget.CardView
+                    android:id="@+id/RandomCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="@android:color/holo_red_light"
+                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp">
 
 
-        </android.support.v7.widget.CardView>
-        <android.support.v7.widget.CardView
-            android:id="@+id/GroupCard"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_rowWeight="1"
-            android:backgroundTint="@android:color/holo_green_light"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="2dp"
-            android:foreground="?android:attr/selectableItemBackgroundBorderless">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_margin="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="RandomShuffle"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
 
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="16dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="GroupShuffle"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                    </LinearLayout>
 
 
-            </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/GroupCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="@android:color/holo_green_light"
+                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp">
 
 
-        </android.support.v7.widget.CardView>
-        <android.support.v7.widget.CardView
-            android:id="@+id/RandomNumberCard"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_rowWeight="1"
-            android:backgroundTint="@android:color/holo_blue_light"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="2dp"
-            android:foreground="?android:attr/selectableItemBackgroundBorderless">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_margin="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="GroupShuffle"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
 
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="16dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="RandomNumber"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                    </LinearLayout>
 
 
-            </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/RandomNumberCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="@android:color/holo_blue_light"
+                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp">
 
 
-        </android.support.v7.widget.CardView>
-        <android.support.v7.widget.CardView
-            android:id="@+id/FiftyFifty"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_rowWeight="1"
-            android:backgroundTint="@android:color/holo_orange_light"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="2dp"
-            android:foreground="?android:attr/selectableItemBackgroundBorderless">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_margin="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="RandomNumber"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
 
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="16dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/generator"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                    </LinearLayout>
 
 
-            </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/FiftyFifty"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="@android:color/holo_orange_light"
+                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp">
 
 
-        </android.support.v7.widget.CardView>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_margin="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/generator"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
 
 
+                    </LinearLayout>
 
 
-    </GridLayout>
+                </android.support.v7.widget.CardView>
+
+
+            </GridLayout>
         </LinearLayout>
 
 
-    <android.support.design.widget.NavigationView
+        <android.support.design.widget.NavigationView
         app:headerLayout="@layout/navigationview_header"
         android:id="@+id/menu_navigationview"
         android:background="@drawable/navigationview_rounded"
+        android:autoMirrored="true"
         android:layout_width="160dp"
         android:layout_height="330dp"
         android:layout_gravity="center|start"

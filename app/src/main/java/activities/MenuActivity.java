@@ -71,12 +71,22 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
         initiate();
 
+
+
+
+
         if(THEME_MODE)
         {
-            navigationView.setBackground(getResources().getDrawable(R.drawable.navigationview_rounded_dark));
+            if(SETTINGS_MODE)
+                navigationView.setBackground(getResources().getDrawable(R.drawable.navigationview_rounded_dark_right));
+            else
+                navigationView.setBackground(getResources().getDrawable(R.drawable.navigationview_rounded_dark));
         }
         else
             {
+                if(SETTINGS_MODE)
+                    navigationView.setBackground(getResources().getDrawable(R.drawable.navigationview_rounded_right));
+                else
                 navigationView.setBackground(getResources().getDrawable(R.drawable.navigationview_rounded));
         }
 
@@ -127,13 +137,33 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         //NavigationView Seite
-        if(SETTINGS_MODE)
+        if(SETTINGS_MODE) // Linke Seite
         {
-         mDrawerlayout.isDrawerOpen(GravityCompat.END);
+
+            mDrawerlayout.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+                navigationView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+
+        }
+       else //Rechte Seite
+        {
+            mDrawerlayout.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+                navigationView.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+        }
+
+
+        if(THEME_MODE)
+        {
+            if(SETTINGS_MODE)
+                navigationView.setBackground(getResources().getDrawable(R.drawable.navigationview_rounded_dark_right));
+            else
+                navigationView.setBackground(getResources().getDrawable(R.drawable.navigationview_rounded_dark));
         }
         else
         {
-            mDrawerlayout.isDrawerOpen(GravityCompat.START);
+            if(SETTINGS_MODE)
+                navigationView.setBackground(getResources().getDrawable(R.drawable.navigationview_rounded_right));
+            else
+                navigationView.setBackground(getResources().getDrawable(R.drawable.navigationview_rounded));
         }
     }
 

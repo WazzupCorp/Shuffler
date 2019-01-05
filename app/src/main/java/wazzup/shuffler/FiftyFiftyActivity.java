@@ -1,5 +1,7 @@
 package wazzup.shuffler;
 
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -25,11 +27,59 @@ public class FiftyFiftyActivity extends AppCompatActivity {
   private Spinner passwordSpinner;
   private ArrayList<Integer> SpinnerArray;
   private ArrayAdapter<Integer> Sadapter;
+  private String THEME = "themes";
+  private String THEME_KEY = "THEME";
+  private TextView passwordlänge;
+
+
+    private boolean THEME_MODE;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        loadThemeMode();
+
+        if(THEME_MODE)
+            setTheme(R.style.darkmode);
+
+        else
+            setTheme(R.style.standardTheme);
+
+
+
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fifty_fifty);
         initiate();
+
+
+        if(THEME_MODE)
+        {
+
+            passwordSpinner.setPopupBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_edittext_dark));
+            großbuchstaben.setTextColor(getResources().getColor(R.color.white));
+            kleinbuchstaben.setTextColor(getResources().getColor(R.color.white));
+            zahlen.setTextColor(getResources().getColor(R.color.white));
+            sonderzeichen.setTextColor(getResources().getColor(R.color.white));
+
+
+        }
+        else
+        {
+
+            passwordSpinner.setPopupBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_edittext));
+            großbuchstaben.setTextColor(getResources().getColor(R.color.darkgray));
+            kleinbuchstaben.setTextColor(getResources().getColor(R.color.darkgray));
+            zahlen.setTextColor(getResources().getColor(R.color.darkgray));
+            sonderzeichen.setTextColor(getResources().getColor(R.color.darkgray));
+
+        }
+
+
+
+
+
     }
 
 
@@ -68,6 +118,7 @@ public class FiftyFiftyActivity extends AppCompatActivity {
         SpinnerArray.add(30);
 
 
+        passwordlänge = findViewById(R.id.passwordlength);
         großbuchstaben = findViewById(R.id.großbuchstaben);
         kleinbuchstaben = findViewById(R.id.kleinbuchstaben);
         zahlen = findViewById(R.id.zahlen);
@@ -93,6 +144,14 @@ public class FiftyFiftyActivity extends AppCompatActivity {
         });
     }
 
+
+
+
+    public void loadThemeMode()
+    {
+        SharedPreferences sharedPref = getSharedPreferences(THEME,MODE_PRIVATE);
+        THEME_MODE = sharedPref.getBoolean(THEME_KEY,true);
+    }
 
 
 
