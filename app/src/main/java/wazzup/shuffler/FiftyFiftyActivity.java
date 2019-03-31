@@ -1,7 +1,6 @@
 package wazzup.shuffler;
 
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -69,10 +68,10 @@ public class FiftyFiftyActivity extends AppCompatActivity {
         {
 
             passwordSpinner.setPopupBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_edittext));
-            großbuchstaben.setTextColor(getResources().getColor(R.color.darkgray));
-            kleinbuchstaben.setTextColor(getResources().getColor(R.color.darkgray));
-            zahlen.setTextColor(getResources().getColor(R.color.darkgray));
-            sonderzeichen.setTextColor(getResources().getColor(R.color.darkgray));
+            großbuchstaben.setTextColor(getResources().getColor(R.color.darkgrey));
+            kleinbuchstaben.setTextColor(getResources().getColor(R.color.darkgrey));
+            zahlen.setTextColor(getResources().getColor(R.color.darkgrey));
+            sonderzeichen.setTextColor(getResources().getColor(R.color.darkgrey));
 
         }
 

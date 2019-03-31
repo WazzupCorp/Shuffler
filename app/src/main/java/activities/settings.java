@@ -1,12 +1,11 @@
 package activities;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.View;
 
 import java.util.Objects;
@@ -47,7 +46,7 @@ public class settings extends AppCompatActivity {
 
         if(THEME_MODE) {
 
-            sToolbar.setBackgroundColor(getResources().getColor(R.color.darkergray));
+            sToolbar.setBackgroundColor(getResources().getColor(R.color.darkergrey));
             sToolbar.setTitleTextColor(getResources().getColor(R.color.white));
             sideBarSwitch.setTextColor(getResources().getColor(R.color.white));
         }
@@ -107,5 +106,14 @@ public class settings extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences(SIDEBAR_SETTINGS , MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean(SIDEBAR_KEY, sideBarSwitch.isChecked()).apply();
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        startActivity(new Intent(this, MenuActivity.class));
+        finish();
+
     }
 }

@@ -75,7 +75,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-        if(THEME_MODE)
+       if(THEME_MODE)
         {
             if(SETTINGS_MODE)
                 navigationView.setBackground(getResources().getDrawable(R.drawable.navigationview_rounded_dark_right));
@@ -226,6 +226,9 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         SharedPreferences sharedPref = getSharedPreferences(SIDEBAR_SETTINGS,MODE_PRIVATE);
         SETTINGS_MODE = sharedPref.getBoolean(SIDEBAR_KEY,true);
     }
+
+
+
 
 }
 
