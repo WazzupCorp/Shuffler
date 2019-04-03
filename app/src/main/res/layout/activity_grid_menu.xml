@@ -3,7 +3,7 @@
     <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/drawer_layout"
+        android:id="@+id/drawer_layout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
@@ -27,7 +27,7 @@
                     android:layout_height="match_parent" />
 
                 <TextView
-                    android:id="@+id/textGrid"
+                    android:id="@+id/textGrid2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -37,7 +37,7 @@
             </RelativeLayout>
 
             <GridLayout
-                android:id="@+id/GridMenu"
+                android:id="@+id/GridMenu2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="4"
@@ -51,7 +51,7 @@
 
                 <!-- Row 1-->
                 <android.support.v7.widget.CardView
-                    android:id="@+id/RandomCard"
+                    android:id="@+id/RandomCard2"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_rowWeight="1"
@@ -87,7 +87,7 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/GroupCard"
+                    android:id="@+id/GroupCard2"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_rowWeight="1"
@@ -123,7 +123,7 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/RandomNumberCard"
+                    android:id="@+id/RandomNumberCard2"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_rowWeight="1"
@@ -159,7 +159,7 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/FiftyFifty"
+                    android:id="@+id/FiftyFifty2"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_rowWeight="1"
@@ -201,7 +201,7 @@
 
         <android.support.design.widget.NavigationView
         app:headerLayout="@layout/navigationview_header"
-        android:id="@+id/menu_navigationview"
+        android:id="@+id/menu_navigationview2"
         android:background="@drawable/navigationview_rounded"
         android:autoMirrored="true"
         android:layout_width="160dp"

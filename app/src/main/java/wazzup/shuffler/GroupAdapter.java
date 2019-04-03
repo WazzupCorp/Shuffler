@@ -1,8 +1,12 @@
 package wazzup.shuffler;
 
+import android.graphics.Color;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -12,12 +16,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.ArrayList;
+import java.util.Random;
+
 import wazzup.shuffler.R;
+
+import static activities.GruppenActivity.ShuffledGruppe;
 
 
 public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> {
     private ArrayList<String> preferencesArray ;
     private onItemClickListener mListener;
+
     GroupAdapter(Context context, ArrayList p)
     {
         Context mContext = context;
@@ -52,7 +61,8 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(GroupAdapter.ViewHolder holder, int position) {
-        holder.text.setText(preferencesArray.get(position));
+        holder.groupItems.setText(preferencesArray.get(position));
+        holder.groupNumber.setText(String.valueOf(position+1));
         //String currentName = preferencesArray.get(position);
 
     }
@@ -66,15 +76,28 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
     //ViewHolder Class
     public static class ViewHolder extends  RecyclerView.ViewHolder {
 
-        protected TextView text;
-
-
+        protected TextView groupNumber;
+        protected FrameLayout groupNumberLayout;
+        protected TextView groupItems;
+        protected FrameLayout groupItemsLayout;
 
         ViewHolder(final View itemView, final onItemClickListener listener)
         {
             super(itemView);
-            text = itemView.findViewById(R.id.groupItem);
+            groupNumber = itemView.findViewById(R.id.groupItemNumber);
+            groupItems = itemView.findViewById(R.id.groupItem);
+            groupNumberLayout = itemView.findViewById(R.id.groupNumberFrame);
+            groupItemsLayout = itemView.findViewById(R.id.groupItemFrame);
+            Random randomColor = new Random();
+            int color = Color.argb(255,randomColor.nextInt(256),randomColor.nextInt(256),randomColor.nextInt(256));
+            groupItemsLayout.setBackgroundColor(color);
 
+            //Dunklere Farbe für Gruppennummer Layout
+            float[] hsv = new float[3];
+            Color.colorToHSV(color,hsv);
+            hsv[2] *= 0.8f;
+            color = Color.HSVToColor(hsv);
+            groupNumberLayout.setBackgroundColor(color);
 
 
             itemView.setOnClickListener(new View.OnClickListener()
@@ -93,7 +116,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
                 }
             });
 
-           ;
+
 
 
 

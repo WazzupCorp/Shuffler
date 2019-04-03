@@ -1,32 +1,33 @@
 package activities;
 
 
-
-import android.app.Activity;
+import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
+import android.os.Build;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
-import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.widget.CardView;
-import android.telecom.Call;
-import android.view.Gravity;
+import android.text.Layout;
+import android.util.Log;
+import android.view.DragEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridLayout;
+import android.widget.ImageButton;
+import java.lang.reflect.Type;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-import Fragments.GruppenFragment;
-import Fragments.RandomFragment;
-import Fragments.RandomNumberFragment;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+
 import wazzup.shuffler.FiftyFiftyActivity;
 import wazzup.shuffler.R;
 
@@ -35,10 +36,10 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout mDrawerlayout;
     private ActionBarDrawerToggle mToggle;
-    private CardView RandomShuffle;
-    private CardView GroupShuffle;
-    private CardView RandomNumber;
-    private CardView FiftyFifty;
+    private ImageButton RandomShuffle;
+    private ImageButton GroupShuffle;
+    private ImageButton RandomNumber;
+    private ImageButton FiftyFifty;
     private GridLayout gridLayout;
     public NavigationView navigationView;
     private boolean THEME_MODE =false;
@@ -46,7 +47,14 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     private String THEME_KEY = "THEME";
     private String SIDEBAR_SETTINGS = "sidebar";
     private String SIDEBAR_KEY = "sidebarkey";
+    private String MENU_BUTTONS = "menu";
+    private String MENU_BUTTONS_KEY = "MENU_BUTTONS";
+    private String LAYOUT = "Layout_State";
+    private String LAYOUT_KEY = "saved_layout_key";
     private boolean SETTINGS_MODE;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -67,28 +75,19 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         loadSettings();
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_grid_menu);
 
+       if(savedInstanceState!= null)
+       {
+
+       }
+
+
+
+
+        setContentView(R.layout.activity_main_menu);
         initiate();
+        setNavigationViewTheme();
 
-
-
-
-
-       if(THEME_MODE)
-        {
-            if(SETTINGS_MODE)
-                navigationView.setBackground(getResources().getDrawable(R.drawable.navigationview_rounded_dark_right));
-            else
-                navigationView.setBackground(getResources().getDrawable(R.drawable.navigationview_rounded_dark));
-        }
-        else
-            {
-                if(SETTINGS_MODE)
-                    navigationView.setBackground(getResources().getDrawable(R.drawable.navigationview_rounded_right));
-                else
-                navigationView.setBackground(getResources().getDrawable(R.drawable.navigationview_rounded));
-        }
 
         //Intents für Activities
         final Intent x = new Intent(this, RandomActivity.class);
@@ -119,15 +118,110 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(a);
             }
         });
+
+
+        RandomShuffle.setOnLongClickListener(longClickListener);
+        RandomShuffle.setOnDragListener(dragListener);
+
+        GroupShuffle.setOnLongClickListener(longClickListener);
+        GroupShuffle.setOnDragListener(dragListener);
+
+        RandomNumber.setOnLongClickListener(longClickListener);
+        RandomNumber.setOnDragListener(dragListener);
+
+        FiftyFifty.setOnLongClickListener(longClickListener);
+        FiftyFifty.setOnDragListener(dragListener);
+
+
     }
 
+    View.OnLongClickListener longClickListener = new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View view) {
+            ClipData data = ClipData.newPlainText("","");
+            View.DragShadowBuilder menuShadowBuilder = new View.DragShadowBuilder(view);
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            {
+                    view.startDragAndDrop(data, menuShadowBuilder, view, View.DRAG_FLAG_OPAQUE);
+            }
+            else {
+                view.startDrag(data, menuShadowBuilder, view, 0);
+                     }
+            return true;
+        }
+    };
+
+View.OnDragListener dragListener = new View.OnDragListener() {
+    @Override
+    public boolean onDrag(View view, DragEvent dragEvent) {
+
+        int dragEve = dragEvent.getAction();
+        final View v = (View) dragEvent.getLocalState();
+
+        ImageButton dropTarget =(ImageButton) view;
+        ImageButton dropped = (ImageButton) v;
+        switch (dragEve)
+        {
+            case DragEvent.ACTION_DRAG_ENTERED:
+                break;
+                case DragEvent.ACTION_DRAG_EXITED:
+                    break;
+
+            case  DragEvent.ACTION_DROP:
+                        dropped.animate().x(dropTarget.getX()).y(dropTarget.getY()).setDuration(400).start();
+                        dropTarget.animate().x(dropped.getX()).y(dropped.getY()).setDuration(400).start();
+               break;
+
+            case  DragEvent.ACTION_DRAG_STARTED:
+
+                if(v.getId() == R.id.RandomCard)
+                {
+                    v.setAlpha(0);
+                }
+                else if(v.getId() == R.id.GroupCard)
+                {
+                    v.setAlpha(0);
+                }
+                else if(v.getId() == R.id.RandomNumberCard)
+                {
+                    v.setAlpha(0);
+                }
+                else if(v.getId() == R.id.FiftyFifty)
+                {
+                    v.setAlpha(0);
+                }
+                break;
+
+            case  DragEvent.ACTION_DRAG_ENDED:
+
+                if(v.getId() == R.id.RandomCard)
+                {
+                   v.setAlpha(1);
+                }
+                else if(v.getId() == R.id.GroupCard)
+                {
+                   v.setAlpha(1);
+                }
+                else if(v.getId() == R.id.RandomNumberCard)
+                {
+              v.setAlpha(1);
+                }
+                else if(v.getId() == R.id.FiftyFifty)
+                {
+               v.setAlpha(1);
+                }
+                break;
+        }
+        return true;
+    }
+};
 
 
     private void initiate()
     {
 
 
-        gridLayout = findViewById(R.id.GridMenu);
+       // gridLayout = findViewById(R.id.GridMenu);
         RandomShuffle = findViewById(R.id.RandomCard);
         GroupShuffle = findViewById(R.id.GroupCard);
         RandomNumber = findViewById(R.id.RandomNumberCard);
@@ -135,6 +229,10 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.menu_navigationview);
         mDrawerlayout = findViewById(R.id.drawer_layout);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
+
 
         //NavigationView Seite
         if(SETTINGS_MODE) // Linke Seite
@@ -221,14 +319,66 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         editor.putBoolean(THEME_KEY, THEME_MODE).apply();
     }
 
+
     public void loadSettings()
     {
         SharedPreferences sharedPref = getSharedPreferences(SIDEBAR_SETTINGS,MODE_PRIVATE);
         SETTINGS_MODE = sharedPref.getBoolean(SIDEBAR_KEY,true);
     }
 
+public void setNavigationViewTheme()
+{
+    if(THEME_MODE)
+    {
+        if(SETTINGS_MODE)
+            navigationView.setBackground(getResources().getDrawable(R.drawable.navigationview_rounded_dark_right));
+        else
+            navigationView.setBackground(getResources().getDrawable(R.drawable.navigationview_rounded_dark));
+    }
+    else
+    {
+        if(SETTINGS_MODE)
+            navigationView.setBackground(getResources().getDrawable(R.drawable.navigationview_rounded_right));
+        else
+            navigationView.setBackground(getResources().getDrawable(R.drawable.navigationview_rounded));
+    }
+}
 
 
 
+
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+
+    }
+
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+
+    }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+
+        super.onSaveInstanceState(outState);
+
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+
+        super.onRestoreInstanceState(savedInstanceState);
+
+    }
 }
 

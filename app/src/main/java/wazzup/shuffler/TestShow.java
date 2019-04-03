@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ public class TestShow extends AppCompatActivity {
 
     private ArrayList<Gruppe> gruppe;
     private boolean THEME_MODE;
-
+    private TextView gruppenNummer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -35,7 +37,7 @@ public class TestShow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_show);
 
-
+        gruppenNummer = findViewById(R.id.groupItemNumber);
         ArrayList g = new ArrayList<>();
         ArrayList<String> finalGroup = new ArrayList<>();
         //Toolbar
@@ -57,8 +59,12 @@ public class TestShow extends AppCompatActivity {
         for (int i = 0; i < GruppenActivity.ShuffledGruppe.size(); i++) {
             int gruppe = 1 + i;
             g = GruppenActivity.ShuffledGruppe.get(i).getPersonen();
-          String s= "Gruppe " + gruppe + ": \n" + Arrays.toString(g.toArray()).replace("[", "").replace("]", "");
+          String s= Arrays.toString(g.toArray()).replace("[", "").replace("]", "");
             finalGroup.add(s);
+
+
+
+
         }
 
 

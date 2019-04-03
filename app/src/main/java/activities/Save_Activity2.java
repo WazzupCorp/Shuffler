@@ -189,6 +189,7 @@ public class Save_Activity2 extends AppCompatActivity implements SwipeController
         String json = gson.toJson(preferenceArray);
         editor.putString(PREFERENCE_KEY, json);
         editor.apply();
+
     }
 
 
@@ -197,8 +198,7 @@ public class Save_Activity2 extends AppCompatActivity implements SwipeController
         SharedPreferences sharedPref = getSharedPreferences(getString(R.string.Names_name), Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPref.getString(PREFERENCE_KEY, null);
-        Type type = new TypeToken<ArrayList<String>>() {
-        }.getType();
+        Type type = new TypeToken<ArrayList<String>>() {}.getType();
         preferenceArray = gson.fromJson(json, type);
         if (preferenceArray == null) {
             preferenceArray = new ArrayList<>();

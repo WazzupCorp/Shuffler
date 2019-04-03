@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
 
 
 
     <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:clickable="true"
+        android:focusable="true"
         tools:layout_editor_absoluteY="-108dp"
         >
 
@@ -20,7 +17,6 @@
             android:id="@+id/randomToolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:layout_marginTop="0dp"
             android:layout_marginBottom="8dp"
             android:background="@android:color/holo_red_light"
             android:elevation="4dp"
@@ -101,6 +97,7 @@
             android:layout_marginBottom="8dp"
             android:orientation="vertical"
             android:clickable="true"
+               android:focusable="true"
             android:windowSoftInputMode="adjustPan|stateHidden"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -141,4 +138,4 @@
 
     </android.support.constraint.ConstraintLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+
