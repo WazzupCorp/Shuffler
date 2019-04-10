@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="standardTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
-
         <item name="colorPrimaryDark">@android:color/black</item>
         <item name="android:textColorPrimary">@color/black</item>
         <item name="android:textColor">@color/black</item>
@@ -14,15 +13,17 @@
 
     <style name="darkmode" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimaryDark">@color/black</item>
-        <item name="android:textColorPrimary">@color/white</item>
-        <item name="android:windowBackground">@color/darkergrey</item>
-        <item name="colorAccent">@color/white</item>
         <item name="android:textColor">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:colorBackground">@color/darkergrey</item>
+        <item name="colorAccent">@color/white</item>
         <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="textColorAlertDialogListItem">@color/white</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
 
     </style>
-
 
 
 

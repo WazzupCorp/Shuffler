@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-
     <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -16,7 +13,7 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/randomToolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="50dp"
             android:layout_marginBottom="8dp"
             android:background="@android:color/holo_red_light"
             android:elevation="4dp"
@@ -29,45 +26,82 @@
             app:navigationIcon="?attr/homeAsUpIndicator"
             app:title="@string/RandomShuffle" />
 
-        <Button
-            android:id="@+id/r.speichern"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/round_button"
-            android:drawableBottom="@drawable/ic_action_name"
-            android:drawableTint="@color/white"
-            android:elevation="10dp"
-            android:gravity="center"
-            android:padding="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.217"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/randompersonfield"
 
-            app:layout_constraintVertical_bias="0.004" />
+    <Button
+        android:id="@+id/clearButton2"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/round_button"
+        android:text="Clear"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/shuffle"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toEndOf="@+id/addListButton2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.151" />
 
-        <Button
-            android:id="@+id/shuffle"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/round_button"
-            android:drawableBottom="@drawable/shuffle"
-            android:drawableTint="@color/white"
-            android:gravity="center"
-            android:padding="5dp"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.713"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/randompersonfield"
-            app:layout_constraintVertical_bias="0.004" />
+
+    <Button
+        android:id="@+id/addListButton2"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/round_button"
+        android:text="Add"
+        app:layout_constraintBottom_toBottomOf="@+id/personenview"
+        app:layout_constraintEnd_toStartOf="@+id/shuffle"
+        app:layout_constraintHorizontal_bias="0.213"
+        app:layout_constraintStart_toEndOf="@+id/r.speichern"
+        app:layout_constraintTop_toTopOf="@+id/randomToolbar"
+        app:layout_constraintVertical_bias="0.151" />
+
+
+    <Button
+        android:id="@+id/r.speichern"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/round_button"
+        android:drawableBottom="@drawable/ic_action_name"
+        android:drawableTint="@color/white"
+        android:elevation="10dp"
+        android:gravity="center"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/randompersonfield"
+
+        app:layout_constraintVertical_bias="0.001" />
+
+    <Button
+        android:id="@+id/shuffle"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/round_button"
+        android:drawableBottom="@drawable/shuffle"
+        android:drawableTint="@color/white"
+        android:gravity="center"
+        android:padding="5dp"
+        android:windowSoftInputMode="adjustPan|stateHidden"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.918"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/randompersonfield"
+        app:layout_constraintVertical_bias="0.001" />
 
         <AutoCompleteTextView
             android:id="@+id/randompersonfield"
@@ -92,9 +126,10 @@
 
            <LinearLayout
             android:id="@+id/personenview"
-            android:layout_width="match_parent"
-            android:layout_height="390dp"
-            android:layout_marginBottom="8dp"
+               android:layout_width="match_parent"
+               android:layout_height="550dp"
+               android:layout_marginTop="145dp"
+            android:layout_marginBottom="0dp"
             android:orientation="vertical"
             android:clickable="true"
                android:focusable="true"
@@ -107,14 +142,13 @@
             app:layout_constraintVertical_bias="1.0">
 
 
-            <ListView
-                android:id="@+id/personen"
+               <ListView
+                   android:id="@+id/personen"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:windowSoftInputMode="adjustPan|stateHidden">
 
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:windowSoftInputMode="adjustPan|stateHidden">
-
-            </ListView>
+               </ListView>
           </LinearLayout>
 
         <ImageButton
@@ -136,6 +170,8 @@
             app:layout_constraintVertical_bias="0.896"
             app:srcCompat="@android:drawable/ic_menu_add" />
 
-    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.constraint.ConstraintLayout>
 
 

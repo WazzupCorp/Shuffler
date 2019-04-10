@@ -2,10 +2,12 @@ package activities;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -24,6 +26,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import wazzup.shuffler.Gruppe;
@@ -42,7 +45,8 @@ public class GruppenActivity extends AppCompatActivity {
     private ArrayAdapter<String> adapter2;
     private ArrayAdapter<String> TextAdapter;
     private Button Pspeichern2;
-    private  Button Shuffle2;
+    private Button Shuffle2;
+    private Button addList;
     private int personen;
     private int groupnumber;
     private int groupsize;
@@ -55,6 +59,7 @@ public class GruppenActivity extends AppCompatActivity {
     private boolean THEME_MODE;
     private String THEME = "themes";
     private String THEME_KEY = "THEME";
+    private Button clearButton;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -155,6 +160,15 @@ public class GruppenActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                personenliste2.clear();
+                adapter2.notifyDataSetChanged();
+            }
+        });
+
     }
 
     private void initiate()
@@ -179,7 +193,9 @@ public class GruppenActivity extends AppCompatActivity {
         PListe2 =findViewById(R.id.personen2);
         Shuffle2 = findViewById(R.id.shuffle2);
         Pspeichern2 = findViewById(R.id.speichern2);
-        gToolbar= findViewById(R.id.groupToolbar);
+        gToolbar = findViewById(R.id.groupToolbar);
+        addList = findViewById(R.id.addListButton);
+        clearButton = findViewById(R.id.clearButton);
 
         //Adapter Initialisieren
         Sadapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_list_item_1,SpinnerArray); //Adapter für Spinner
@@ -199,7 +215,7 @@ public class GruppenActivity extends AppCompatActivity {
         setSupportActionBar(gToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
+        AddList();
 
 
     }
@@ -370,18 +386,125 @@ public class GruppenActivity extends AppCompatActivity {
         return random;
     }
 
+   private ArrayList<Integer> mUserItems = new ArrayList<>();
+   private boolean [] checkedItems;
+   private String [] listItems;
+
+    public void AddList()
+    {
+    listItems = new String[autoTextArray.size()];
+
+        for(int i = 0; i<autoTextArray.size();i++)
+        {
+            listItems[i] = autoTextArray.get(i);
+        }
+       checkedItems = new boolean[listItems.length];
+
+    addList.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            AlertDialog.Builder mBuilder;
+            if(THEME_MODE) {
+
+               mBuilder = new AlertDialog.Builder(GruppenActivity.this, R.style.darkmode);
+            }
+          else
+          {
+               mBuilder = new AlertDialog.Builder(GruppenActivity.this, R.style.standardTheme);
+           }
+
+            mBuilder.setTitle(R.string.füge_der_Liste_hinzu);
+            mBuilder.setMultiChoiceItems(listItems, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int position, boolean isChecked) {
+                    if(isChecked)
+                    {
+                        if(!mUserItems.contains(position))
+                        {
+                            mUserItems.add(position);
+                        }
+
+                    }
+                    else if (mUserItems.contains(position))
+                    {
+
+                        mUserItems.remove(mUserItems.indexOf(position));
+                    }
+                }
+            });
+
+
+            mBuilder.setCancelable(false);
+            mBuilder.setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int which) {
+
+
+                    for (int i = 0; i < mUserItems.size(); i++)
+                    {
+                        if(!personenliste2.contains(listItems[mUserItems.get(i)]))
+                        personenliste2.add(listItems[mUserItems.get(i)]);
+                    }
+
+                    adapter2.notifyDataSetChanged();
+
+                }
+            });
+
+            mBuilder.setNegativeButton(R.string.zurück, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+
+            mBuilder.setNeutralButton(R.string.lösche_alles, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int which) {
+                    for(int i = 0; i< checkedItems.length;i++)
+                    {
+                        checkedItems[i] = false;
+                        mUserItems.clear();
+
+                    }
+                }
+            });
+
+            AlertDialog mDialog = mBuilder.create();
+
+            mDialog.show();
 
 
 
-    public void onResume()
+
+
+
+        }
+    });
+    }
+
+
+    @Override
+    protected void onResume()
     {
         super.onResume();
         loadData();
         TextAdapter.notifyDataSetChanged();
         TextAdapter = new ArrayAdapter<>(this,android.R.layout.simple_dropdown_item_1line,autoTextArray);
         PEingabe2.setAdapter(TextAdapter);
+        AddList();
     }
 
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        loadData();
+        TextAdapter.notifyDataSetChanged();
+        TextAdapter = new ArrayAdapter<>(this,android.R.layout.simple_dropdown_item_1line,autoTextArray);
+        PEingabe2.setAdapter(TextAdapter);
+        AddList();
+    }
 
 
 }

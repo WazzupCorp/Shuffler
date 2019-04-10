@@ -14,7 +14,14 @@
     <string name="title_activity_settings">Settings</string>
     <string name="Preferences_name">preferences</string>
     <string name="Names_name">names</string>
-
+    <string name="füge_der_Liste_hinzu">Füge der List hinzu</string>
+    <string name="okay">Okay</string>
+    <string name="zurück">Zurück</string>
+    <string name="lösche_alles">Entferne alles</string>
+    <string name="kleinere_Werte">Kleinere Werte wählen</string>
+    <string name="leeres_feld">Feld ist leer</string>
+    <string name="wurde_entfernt"> wurde entfernt</string>
+    <string name="zurücksetzen">Zurücksetzen</string>
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->

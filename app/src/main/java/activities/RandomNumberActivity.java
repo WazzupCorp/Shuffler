@@ -92,7 +92,7 @@ public class RandomNumberActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        Toast.makeText(RandomNumberActivity.this,"Kleinere Werte wählen", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RandomNumberActivity.this,R.string.kleinere_Werte, Toast.LENGTH_SHORT).show();
 
                     }
                 }
@@ -125,7 +125,7 @@ public class RandomNumberActivity extends AppCompatActivity {
             }
             else
             {
-             Toast.makeText(RandomNumberActivity.this,"Feld ist leer", Toast.LENGTH_SHORT).show();
+             Toast.makeText(RandomNumberActivity.this,R.string.leeres_feld, Toast.LENGTH_SHORT).show();
             }
             return 0;
     }

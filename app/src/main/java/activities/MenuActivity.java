@@ -1,6 +1,7 @@
 package activities;
 
 
+import android.app.ActionBar;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Layout;
 import android.util.Log;
 import android.view.DragEvent;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridLayout;
@@ -244,7 +246,7 @@ View.OnDragListener dragListener = new View.OnDragListener() {
         }
        else //Rechte Seite
         {
-            mDrawerlayout.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+           mDrawerlayout.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
                 navigationView.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
         }
 

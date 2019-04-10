@@ -6,6 +6,8 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:clickable="true"
 
     >
 
@@ -15,16 +17,17 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:weightSum="6"
+        android:focusable="true"
+        android:clickable="true"
         tools:context="wazzup.shuffler.AppCompatPreferenceActivity">
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+            android:layout_weight="2"
+            android:focusable="true"
+            android:clickable="true">
 
             <TextView
                 android:id="@+id/textGrid"
@@ -33,13 +36,25 @@
                 android:layout_centerInParent="true"
                 android:text="@string/app_name"
                 android:textColor="@android:color/holo_blue_dark"
-                android:textSize="34sp" />
+                android:textSize="34sp"
+                android:visibility="visible" />
+
+            <ImageButton
+                android:id="@+id/menuLogo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:background="@drawable/menu_logo" />
+
+
         </RelativeLayout>
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4">
+            android:layout_weight="4"
+            android:focusable="true"
+            android:clickable="true">
 
 
             <ImageButton
@@ -54,6 +69,8 @@
                 android:backgroundTint="@android:color/holo_red_light"
                 android:elevation="10dp"
                 android:src="@drawable/ic_shuffle_black_50dp"
+                android:focusable="true"
+                android:clickable="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.194"
@@ -74,6 +91,8 @@
                 android:elevation="10dp"
                 android:src="@drawable/ic_group_black_50dp"
                 android:hapticFeedbackEnabled="true"
+                android:focusable="true"
+                android:clickable="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.85"
@@ -94,6 +113,8 @@
                 android:elevation="10dp"
                 android:src="@drawable/ic_casino_black_50dp"
                 android:hapticFeedbackEnabled="true"
+                android:focusable="true"
+                android:clickable="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.194"
@@ -114,30 +135,37 @@
                 android:elevation="10dp"
                 android:src="@drawable/ic_lock_outline_black_50dp"
                 android:hapticFeedbackEnabled="true"
+                android:focusable="true"
+                android:clickable="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.85"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.679" />
+
+
         </android.support.constraint.ConstraintLayout>
 
 
     </LinearLayout>
 
 
-    <android.support.design.widget.NavigationView
-        app:headerLayout="@layout/navigationview_header"
-        android:id="@+id/menu_navigationview"
-        android:background="@drawable/navigationview_rounded"
-        android:autoMirrored="true"
-        android:layout_width="160dp"
-        android:layout_height="330dp"
-        android:layout_gravity="center|start"
-        app:menu="@menu/drawermenu" />
+        <android.support.design.widget.NavigationView
+            android:id="@+id/menu_navigationview"
+            android:layout_width="160dp"
+            android:layout_height="330dp"
+            android:focusable="true"
+            android:clickable="true"
+            android:layout_gravity="center|start"
 
-</android.support.v4.widget.DrawerLayout>
+            android:autoMirrored="true"
+            android:background="@drawable/navigationview_rounded"
+            app:headerLayout="@layout/navigationview_header"
+            app:menu="@menu/drawermenu" >
 
+        </android.support.design.widget.NavigationView>
 
+    </android.support.v4.widget.DrawerLayout>
 
 

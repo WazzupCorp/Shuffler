@@ -3,6 +3,7 @@ package activities;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -57,6 +58,8 @@ public class RandomActivity extends AppCompatActivity{
     private String THEME = "themes";
     private String THEME_KEY = "THEME";
     private Context context;
+    private Button addList;
+    private Button clearButton;
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -64,9 +67,9 @@ public class RandomActivity extends AppCompatActivity{
 
 
         loadThemeMode();
-        if(THEME_MODE)
+        if(THEME_MODE) //DarkMode
             setTheme(R.style.darkmode);
-        else
+        else //DayMode
             setTheme(R.style.standardTheme);
 
         super.onCreate(savedInstanceState);
@@ -83,11 +86,11 @@ public class RandomActivity extends AppCompatActivity{
         }
 
 
-        loadData();
-        initiate();
+        loadData(); //Gibt die gespeicherten Preferences zurück
+        initiate(); //Initialisiert Buttons etc.
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
-        if(THEME_MODE)
+        if(THEME_MODE)//DarkMode
         {
 
             PEingabe.setDropDownBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_edittext_dark));
@@ -96,7 +99,7 @@ public class RandomActivity extends AppCompatActivity{
             Pspeichern.setBackground(getResources().getDrawable(R.drawable.round_button_dark));
             Shuffle.setBackground(getResources().getDrawable(R.drawable.round_button_dark));
         }
-        else
+        else //DayMode
         {
             PEingabe.setDropDownBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_edittext));
             PEingabe.setBackground(getResources().getDrawable(R.drawable.rounded_edittext));
@@ -108,7 +111,7 @@ public class RandomActivity extends AppCompatActivity{
 
         PEingabe.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public boolean onTouch(View v, MotionEvent event) { //
                 final int DRAWABLE_LEFT = 0;
                 final int DRAWABLE_TOP = 1;
                 final int DRAWABLE_RIGHT = 2;
@@ -116,7 +119,7 @@ public class RandomActivity extends AppCompatActivity{
 
                 if(event.getAction() == MotionEvent.ACTION_DOWN) {
                     if(event.getRawX() >= (PEingabe.getRight() - PEingabe.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        // your action here
+
                         PEingabe.getText().clear();
                         return true;
                     }
@@ -145,7 +148,7 @@ public class RandomActivity extends AppCompatActivity{
             final Intent i = new Intent(this, Save_Activity.class);
             AddButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(View view) { //Startet Save_Activity
 
                     startActivity(i);
                 }
@@ -157,7 +160,7 @@ public class RandomActivity extends AppCompatActivity{
         {
             @Override
             public void onClick(View view)
-            {
+            { // Wählt random Item aus der Liste
                 if(personenliste.size()>= 2)
                 {
                     myDialog.setContentView(R.layout.shuffle_popup);
@@ -176,12 +179,19 @@ public class RandomActivity extends AppCompatActivity{
         {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l)
-            {
+            { //Löscht Item aus der Liste bei gedrückt halten
                 adapter.remove(adapter.getItem(i));
                 return true;
             }
         });
 
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { //Löscht alles aus der  Liste
+                personenliste.clear();
+                adapter.notifyDataSetChanged();
+            }
+        });
 
     }
 
@@ -197,11 +207,9 @@ public class RandomActivity extends AppCompatActivity{
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        // Restore UI state from the savedInstanceState.
-        // This bundle has also been passed to onCreate.
 
        if (savedInstanceState != null) {
-            // Restore value of members from saved state
+
             personenliste=savedInstanceState.getStringArrayList(PERSON_KEY);
         }
         else
@@ -241,7 +249,9 @@ public class RandomActivity extends AppCompatActivity{
         Pspeichern = findViewById(R.id.r_speichern);
         Shuffle = findViewById(R.id.shuffle);
         PListe = findViewById(R.id.personen);
+        addList = findViewById(R.id.addListButton2);
         AddButton = this.findViewById(R.id.imageButton);
+        clearButton = findViewById(R.id.clearButton2);
         personenliste = new ArrayList<>();
         adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,personenliste);
         TextAdapter = new ArrayAdapter<>(this,android.R.layout.simple_dropdown_item_1line,autoTextArray);
@@ -250,9 +260,13 @@ public class RandomActivity extends AppCompatActivity{
         TextAdapter.setNotifyOnChange(true);
         myDialog = new Dialog(RandomActivity.this);
 
+
+
+
         setSupportActionBar(rToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        AddList();
     }
 
     public void loadThemeMode()
@@ -263,6 +277,112 @@ public class RandomActivity extends AppCompatActivity{
     }
 
 
+    private ArrayList<Integer> mUserItems = new ArrayList<>();
+    private boolean [] checkedItems;
+    private String [] listItems;
+
+    public void AddList() //Startet Dialog mit der man Items auswählen kann und sie der Liste hinzufügen kann
+    {
+
+        listItems = new String[autoTextArray.size()]; //Array für die Items
+
+        for(int i = 0; i<autoTextArray.size();i++)
+        {
+            listItems[i] = autoTextArray.get(i);
+        }
+
+        checkedItems = new boolean[listItems.length]; //Array für die Items die ausgewählt wurden
+
+        addList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder mBuilder;
+
+
+                if(THEME_MODE) {
+
+                    mBuilder = new AlertDialog.Builder(RandomActivity.this,R.style.darkmode);
+
+                }
+                else
+                {
+                    mBuilder = new AlertDialog.Builder(RandomActivity.this,R.style.standardTheme);
+                }
+
+                mBuilder.setTitle(R.string.füge_der_Liste_hinzu);
+                mBuilder.setMultiChoiceItems(listItems, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int position, boolean isChecked) { //Checked items werden der Liste hinzugefügt oder gelöscht
+                        if(isChecked)
+                        {
+                            if(!mUserItems.contains(position))
+                            {
+                                mUserItems.add(position);
+
+                            }
+
+                        }
+                        else if (mUserItems.contains(position))
+                        {
+
+                            mUserItems.remove(mUserItems.indexOf(position));
+                        }
+                    }
+                });
+
+                mBuilder.setCancelable(false);
+                mBuilder.setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) { //Bestätigen Button für den Dialog
+
+
+                        for (int i = 0; i < mUserItems.size(); i++)
+                        {
+                            if(!personenliste.contains(listItems[mUserItems.get(i)]))
+                                personenliste.add(listItems[mUserItems.get(i)]);
+                        }
+
+                        adapter.notifyDataSetChanged();
+
+                    }
+                });
+
+                mBuilder.setNegativeButton(R.string.zurück, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+
+                    }
+                });
+
+                mBuilder.setNeutralButton(R.string.lösche_alles, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        for(int i = 0; i< checkedItems.length;i++)
+                        {
+                            checkedItems[i] = false;
+                            mUserItems.clear();
+
+                        }
+                    }
+                });
+
+                final AlertDialog mDialog = mBuilder.create();
+
+
+
+                mDialog.show(); //Dialog wird ausgeführt
+
+
+
+
+
+
+            }
+        });
+    }
+
+
     public void onResume()
     {
         super.onResume();
@@ -270,6 +390,7 @@ public class RandomActivity extends AppCompatActivity{
      TextAdapter.notifyDataSetChanged();
      TextAdapter = new ArrayAdapter<>(this,android.R.layout.simple_dropdown_item_1line,autoTextArray);
      PEingabe.setAdapter(TextAdapter);
+     AddList();
     }
 
     @Override

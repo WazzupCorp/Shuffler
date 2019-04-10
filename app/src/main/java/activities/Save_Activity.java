@@ -255,8 +255,8 @@ if(viewHolder instanceof  Save_Adapter.ViewHolder)
     SaveActivityListAdapter.removeItem(deleteIndex);
     SaveData();
 
-    Snackbar snackbar = Snackbar.make(rootlayout,name + " wurde entfernt" ,Snackbar.LENGTH_SHORT);
-    snackbar.setAction("Zurücksetzen", new View.OnClickListener() {
+    Snackbar snackbar = Snackbar.make(rootlayout,name + R.string.wurde_entfernt ,Snackbar.LENGTH_SHORT);
+    snackbar.setAction(R.string.zurücksetzen, new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             SaveActivityListAdapter.restoreItem(deletedItem,deleteIndex);

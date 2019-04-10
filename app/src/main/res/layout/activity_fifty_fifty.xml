@@ -30,7 +30,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/FiftyFiftyToolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="50dp"
         android:layout_marginBottom="8dp"
         android:background="@android:color/holo_orange_light"
         android:elevation="4dp"
