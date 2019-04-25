@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -255,7 +256,13 @@ if(viewHolder instanceof  Save_Adapter.ViewHolder)
     SaveActivityListAdapter.removeItem(deleteIndex);
     SaveData();
 
-    Snackbar snackbar = Snackbar.make(rootlayout,name + R.string.wurde_entfernt ,Snackbar.LENGTH_SHORT);
+    Snackbar snackbar = Snackbar.make(rootlayout,name +" "+ getString(R.string.wurde_entfernt) ,Snackbar.LENGTH_SHORT);
+    //Snackbar Farbe auf weiß setzen
+    int SnackbarTextID = android.support.design.R.id.snackbar_text;
+    View SnackbarView = snackbar.getView();
+    TextView textView = (TextView) SnackbarView.findViewById(SnackbarTextID);
+    textView.setTextColor(getResources().getColor(R.color.white));
+    //Snackbar Zurücksetzen Action
     snackbar.setAction(R.string.zurücksetzen, new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -263,6 +270,7 @@ if(viewHolder instanceof  Save_Adapter.ViewHolder)
             SaveData();
         }
     });
+
     snackbar.setActionTextColor(Color.YELLOW);
     snackbar.show();
 

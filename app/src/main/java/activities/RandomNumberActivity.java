@@ -75,27 +75,29 @@ public class RandomNumberActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                if(!first.getText().toString().isEmpty() & !second.getText().toString().isEmpty())
-                {
-                    int firstNumber = Integer.parseInt(first.getText().toString());
-                    int secondNumber = Integer.parseInt(second.getText().toString());
+                try {
+                    if (!first.getText().toString().isEmpty() & !second.getText().toString().isEmpty()) {
+                        long firstNumber = Integer.parseInt(first.getText().toString());
+                        long secondNumber = Integer.parseInt(second.getText().toString());
 
-                    if(firstNumber < secondNumber &firstNumber <2147483646 & secondNumber <= 2147483646 )
-                    {
-                        myDialog.setContentView(R.layout.number_shuffle_popup);
-                        RelativeLayout frame = myDialog.findViewById(R.id.popupFrame2);
-                        TextView mPerson = myDialog.findViewById(R.id.popupPerson2);
-                        Objects.requireNonNull(myDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                        mPerson.setText(String.valueOf(generateRandomNumber()));
-                        myDialog.getWindow().setWindowAnimations(R.style.DialogScale);
-                        myDialog.show();
-                    }
-                    else
-                    {
-                        Toast.makeText(RandomNumberActivity.this,R.string.kleinere_Werte, Toast.LENGTH_SHORT).show();
+                        if (firstNumber < secondNumber) {
+                            myDialog.setContentView(R.layout.number_shuffle_popup);
+                            RelativeLayout frame = myDialog.findViewById(R.id.popupFrame2);
+                            TextView mPerson = myDialog.findViewById(R.id.popupPerson2);
+                            Objects.requireNonNull(myDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            mPerson.setText(String.valueOf(generateRandomNumber()));
+                            myDialog.getWindow().setWindowAnimations(R.style.DialogScale);
+                            myDialog.show();
+                        } else {
+                            Toast.makeText(RandomNumberActivity.this, R.string.kleinere_Werte, Toast.LENGTH_SHORT).show();
 
+                        }
                     }
-                }
+
+                 }catch(NumberFormatException e)
+            {
+                Toast.makeText(RandomNumberActivity.this, R.string.kleinere_Werte, Toast.LENGTH_SHORT).show();
+            }
 
             }
         });

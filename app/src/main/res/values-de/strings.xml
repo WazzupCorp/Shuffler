@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="füge_der_Liste_hinzu">Füge der List hinzu</string>
+    <string name="Open">Öffnen</string>
+    <string name="Names_name">namen</string>
+    <string name="Close" translatable="false">schließen</string>
+    <string name="okay">Okay</string>
+    <string name="lösche_alles">Entferne alles</string>
+    <string name="leeres_feld">Feld ist leer</string>
+    <string name="kleinere_Werte">Kleinere Werte wählen</string>
+    <string name="generator">Passwort Generator</string>
+    <string name="title_activity_settings">Einstellungen</string>
+    <string name="wurde_entfernt">wurde entfernt</string>
+    <string name="zurück">Zurück</string>
+    <string name="zurücksetzen">Zurücksetzen</string>
+    <string name="settings">Einstellungen</string>
+    <string name="functions">Funktionen</string>
+</resources>

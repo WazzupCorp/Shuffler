@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Close" translatable="false">close</string>
+    <string name="Names_name">names</string>
+    <string name="Open">Open</string>
+    <string name="füge_der_Liste_hinzu">Add to list</string>
+    <string name="generator">Password generator</string>
+    <string name="kleinere_Werte">"Chose smaller "</string>
+    <string name="leeres_feld">Field is empty</string>
+    <string name="lösche_alles">Delete all</string>
+    <string name="okay">Okay</string>
+    <string name="title_activity_gruppen">GroupActivity</string>
+    <string name="title_activity_random">RandomActivity</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="wurde_entfernt">has been deleted</string>
+    <string name="zurück">Back</string>
+    <string name="zurücksetzen">Undo</string>
+    <string name="darkmode">Darkmode</string>
+    <string name="settings">Settings</string>
+    <string name="functions">Functions</string>
+</resources>

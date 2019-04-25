@@ -11,7 +11,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/settingsToolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="50dp"
         android:layout_marginBottom="8dp"
         android:background="@android:color/white"
         android:elevation="4dp"
@@ -34,11 +34,23 @@
             android:textAlignment="gravity"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="Sidebar Site"
+            android:text="Switch to Left/Right handed mode"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_width="match_parent"
             android:layout_height="50dp" />
+
+
+        <Spinner
+            android:id="@+id/languageswitch"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:text="Change language"
+            android:textAlignment="gravity"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </LinearLayout>
